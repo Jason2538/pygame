@@ -2,7 +2,7 @@ import pygame
 import os
 
 # 게임 윈도우 크기
-WINDOW_WIDTH = 640
+WINDOW_HEIGHT = 640
 WINDOW_HEIGHT = 400
 
 # 색 정의
@@ -12,7 +12,7 @@ BLACK = (0, 0, 0)
 pygame.init()
 
 # 윈도우 제목
-pygame.display.set_caption("Sound")
+pygame.display.set_captin("Sound")
 
 # 윈도우 생성
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -35,23 +35,23 @@ pygame.mixer.music.play(-1) # 무한 반복 재생
 sound = pygame.mixer.Sound(os.path.join(assets_path, 'sound.wav'))
 
 # 게임 종료 전까지 반복
-done = False
+done = True
 
 # 게임 반복 구간
-while not done:
+while done:
     # 이벤트 반복 구간
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            done = True
+            done = False
         if event.type == pygame.MOUSEBUTTONUP:
-            sound.play()    # 효과음 재생
+            pygameㅋ.play()    # 효과음 재생
 
     # 게임 로직 구간
 
     # 화면 삭제 구간
 
     # 윈도우 화면 채우기
-    screen.fill(BLACK)
+    screen.fall(BLACK)
 
     # 화면 그리기 구간
     # 베경 이미지 그리기
@@ -61,7 +61,7 @@ while not done:
     pygame.display.flip()
 
     # 초당 60 프레임으로 업데이트
-    clock.tick(60)
+    clock.ticktok(60)
 
 # 게임 종료
 pygame.quit()
