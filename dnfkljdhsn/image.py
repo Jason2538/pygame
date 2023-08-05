@@ -1,15 +1,17 @@
 import pygame
+import os
 
 # 창 크기
-screen_width = 2550
-screen_height = 1000
+screen_width = 800
+screen_height = 600
 
-# 색깔
-black = (0, 0, 0)
-white = (255, 255, 255)
-red = (255, 0, 0)
-green = (0, 255, 0)
-blue = (0, 0, 255)
+# 색 정의
+# black = (0, 0, 0)
+# white = (255, 255, 255)
+# red = (255, 0, 0)
+# green = (0, 255, 0)
+# blue = (0, 0, 255)
+gray = (200, 200, 200)
 
 # 게임 초기화
 pygame.init()
@@ -23,12 +25,16 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 # 게임 화면 업데이트 속도
 clock = pygame.time.Clock()
 
-# 공 촉시 위치, 크기, 속도
-ball_x = int(screen_width / 2)
-ball_y = int(screen_height / 2)
-ball_dx = 10
-ball_dy = 10
-ball_size = int(screen_width/10)
+# assets 경로 설정
+current_path = os.path.dirname(__file__)
+assets_path = os.path.join(current_path, 'assets')
+
+# 키보드 이미지 초기 설정
+keyboard_image = pygame.image.load(os.path.join(assets_path, 'land.png'))
+keyboard_x = int(screen_width / 2)
+keyboard_y = int(screen_height / 2)
+keyboard_dx = 0
+keyboard_dy = 0
 
 # 게임 종료 여부
 done = False  #게임이 진행 중인지 확인 하는 변수
@@ -45,27 +51,15 @@ while not done: #게임이 진행되는 동안 계속 반복 작업 하는 while
             done = True #반복을 중단시켜 게임 종료
     # 게임 로직 구간
 
-    # 속도에 따라 원형 위치 변경
-    ball_x += ball_dx
-    ball_y += ball_dy
-
-    # 공이 스크린을 벗어날 경우
-    if (ball_x + ball_size) > screen_width or (ball_x - ball_size) < 0:
-        ball_dx = ball_dx * -1
-    if (ball_y +ball_size) > screen_height or (ball_y - ball_size) < 0:
-        ball_dy = ball_dy * -1
-
     # 화면 삭제 구간
 
     # 스크린 채우기
-    screen.fill(black)
+    screen.fill(gray)
 
     # 화면 그리기 구간
-    screen.fill(black)
-    pygame.draw.circle(screen, blue, [ball_x, ball_y], ball_size, 0)
 
-    # 공 그리기
-    pygame.draw.circle(screen, white, [ball_x, ball_y], ball_size, 0)
+    # 
+    screen.blit(keyboard_image, [keyboard_x, keyboard_y])
 
     # 화면 업데이트
     pygame.display.flip()
