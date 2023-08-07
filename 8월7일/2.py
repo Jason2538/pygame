@@ -1,4 +1,4 @@
-
+import random
 import pygame
 
 sc_w = 800
@@ -19,26 +19,23 @@ screen = pygame.display.set_mode((sc_w, sc_h))
 
 clock = pygame.time.Clock()
 
+color = BLACK
+
 running = True
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        elif event.type==pygame.KEYDOWN:
+            if event.key ==pygame.K_SPACE:
+                color = random.choice([blue, red, green])
+                print("나의 이쁜이 윤아로")
 
     screen.fill(white)
-    pygame.draw.rect(screen, BLACK, [50,  50, 100, 100],0)
-    rect2 = pygame.Rect(0, 0, 50, 50)
+    rect2 = pygame.Rect(0, 0, 100, 100)
     rect2.center = (sc_w //2, sc_h//2)
-    pygame.draw.rect(screen, blue, rect2, 0)
-    rect4 = pygame.Rect(200,200,40,40)
-    # rect4.center = (sc_w //2, sc_h//2)
-    pygame.draw.rect(screen, green, rect4, 0)
-    rect3 = pygame.Rect(200, 200, 20, 20)
-    pygame.draw.rect(screen, red, rect3 , 0)
-    print(rect3.center)
-    # rect5 = pygame.Rect(180,180,60,60)
-    # rect5.center = (sc_w//2,sc_h//2)
-    # pygame.draw.rect(screen, red,)
+    pygame.draw.rect(screen, color, rect2, 0)
+
     pygame.display.flip()
     clock.tick(60)
 pygame.quit()

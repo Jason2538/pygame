@@ -119,7 +119,7 @@ class Game():
     def run_logic(self):
         self.snake.move()
         self.check_eat(self.snake, self.feed)
-        self.speed = (20 + self.snake.length) / 4
+        self.speed = (20 + self.snake.length) / 8
 
     # 뱀이 먹이를 먹었는지 체크
     def check_eat(self, snake, feed):
