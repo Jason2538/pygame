@@ -14,7 +14,8 @@ blue = (20, 60, 120)
 orange = (25, 170, 70)
 red = (250, 0, 0)
 
-FPS = 60 
+current_path = os.path.dirname(__name__)
+assets_path = os.path.join(current_path, "assets")
 
 # 공 객체
 class Ball(object):
@@ -115,17 +116,13 @@ class Enemy(object):
 # 게임 객체
 class Game(object):
     def __init__(self):
-        bounce_path = resource_path("assets/bounce.wav")
-        ping_path = resource_path("assets/ping.wav")
-        pong_path = resource_path("assets/pong.wav")
-        font_path = resource_path("assets/NanumGothicCoding-Bold.ttf")
-        # bounce_sound = pygame.mixer.Sound(bounce_path)
-        # ping_sound = pygame.mixer.Sound(ping_path)
-        # pong_sound = pygame.mixer.Sound(pong_path)
-        # self.font = pygame.font.Font(font_path, 50)
-        # self.ball = Ball(bounce_sound)
-        # self.player = Player(ping_sound)
-        # self.enemy = Enemy(pong_sound)
+        bounce_sound = pygame.mixer.Sound(os.path.join(assets_path, "bounce.wav"))
+        ping_sound = pygame.mixer.Sound(os.path.join(assets_path, "ping.wav"))
+        pong_sound = pygame.mixer.Sound(os.path.join(assets_path, "pong.wav"))
+        self.font = pygame.font.Font.SysFont("맑은 고딕", 50, False, False)
+        self.ball = Ball(bounce_sound)
+        self.player = Player(ping_sound)
+        self.enemy = Enemy(pong_sound)
         self.player_score = 0
         self.enemy_score = 0
 
@@ -192,7 +189,7 @@ class Game(object):
             self.enemy.draw(screen)
             # 게임 중앙 점선
             for x in range(0, sc_w, 24):
-                pygame.draw.rect(screen, white, [x, int(sc_h / 2), 10, 10])
+                pygame.draw.rect(screen, white, [x, sc_h // 2, 10, 10])
             # 적 점수 표시
             enemy_score_label = self.font.render(str(self.enemy_score), True, white)
             screen.blit(enemy_score_label, (10, 260))
@@ -217,13 +214,13 @@ def main():
     clock = pygame.time.Clock()
     game = Game()
 
-    done = False
-    while not done:
-        done = game.process_events()
+    running = True
+    while not running:
+        running = game.process_events()
         game.run_logic()
         game.display_frame(screen)
         pygame.display.flip()
-        clock.tick(FPS)
+        clock.tick(60)
 
     pygame.quit()
 

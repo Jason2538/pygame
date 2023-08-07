@@ -50,7 +50,7 @@ while running:
     screen.fill(white)
     rect2 = pygame.Rect(0, 20, 0, 20)
     rect2.center = (r_x, r_y)
-    pygame.draw.rect(screen, BLUE, rect2, 0)
+    pygame.draw.rect(screen, blue, rect2, 0)
     pygame.display.flip()
     clock.tick(60)
 pygame.quit()
