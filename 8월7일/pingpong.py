@@ -119,7 +119,7 @@ class Game(object):
         bounce_sound = pygame.mixer.Sound(os.path.join(assets_path, "bounce.wav"))
         ping_sound = pygame.mixer.Sound(os.path.join(assets_path, "ping.wav"))
         pong_sound = pygame.mixer.Sound(os.path.join(assets_path, "pong.wav"))
-        self.font = pygame.font.Font.SysFont("맑은 고딕", 50, False, False)
+        self.font = pygame.font.SysFont("맑은 고딕", 50, False, False)
         self.ball = Ball(bounce_sound)
         self.player = Player(ping_sound)
         self.enemy = Enemy(pong_sound)
