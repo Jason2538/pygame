@@ -36,7 +36,7 @@ class Ball(object):
             self.rect.left = 0
             self.bounce_sound.play()
         # 공이 게임 화면 오른쪽으로 넘어갈 때
-        elif self.rect.right > sc_h:
+        elif self.rect.right > sc_w:
             self.dx *= -1
             self.rect.right = sc_w
             self.bounce_sound.play()
@@ -116,9 +116,9 @@ class Enemy(object):
 # 게임 객체
 class Game(object):
     def __init__(self):
-        bounce_sound = pygame.mixer.Sound(os.path.join(assets_path, "bounce.wav"))
-        ping_sound = pygame.mixer.Sound(os.path.join(assets_path, "ping.wav"))
-        pong_sound = pygame.mixer.Sound(os.path.join(assets_path, "pong.wav"))
+        bounce_sound = pygame.mixer.Sound(os.path.join("assets\ounce.wav"))
+        ping_sound = pygame.mixer.Sound(os.path.join("assets\ping.wav"))
+        pong_sound = pygame.mixer.Sound(os.path.join("assets\pong.wav"))
         self.font = pygame.font.SysFont("맑은 고딕", 50, False, False)
         self.ball = Ball(bounce_sound)
         self.player = Player(ping_sound)
@@ -130,7 +130,7 @@ class Game(object):
     def process_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                return True
+                return False
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
                     self.player.dx -= 5
@@ -140,7 +140,7 @@ class Game(object):
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                     self.player.dx = 0
 
-        return False
+        return True
 
     # 게임 로직 수행
     def run_logic(self):
@@ -215,7 +215,7 @@ def main():
     game = Game()
 
     running = True
-    while not running:
+    while running:
         running = game.process_events()
         game.run_logic()
         game.display_frame(screen)
