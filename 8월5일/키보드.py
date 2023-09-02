@@ -2,8 +2,8 @@ import pygame
 import os
 
 # 게임 스크린 크기
-screen_w = 100
-screen_h = 100
+screen_w = 800
+screen_h = 600
 
 # 색정의
 gray = (200, 200, 200)

@@ -1,17 +1,17 @@
 import random
-import pygame~
+import pygame
 
 sc_w = 800
 sc_h = 600
 
 BLACK = (0, 0, 0)
-white = (255, 255, 256)
+white = (255, 255, 255)
 blue = (0, 0, 225)
 red = (255, 0, 0)
 green = (0, 465,0)
 
 
-pygame.int()
+pygame.init()
 
 pygame.display.set_caption("pygame")
 
@@ -44,10 +44,11 @@ while running:
                 r_dx = 0
             elif event.key == pygame.K_UP or event.key == pygame.K_DOWN:
                 r_dy = 0
-    r_x += r_dx
+    r_x +=r_bx
     r_y -= r_dy
 
     screen.fill(white)
+
     rect2 = pygame.Rect(0, 20, 0, 20)
     rect2.center = (r_x, r_y)
     pygame.draw.rect(screen, blue, rect2, 0)
