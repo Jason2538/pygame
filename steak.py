@@ -1,5 +1,7 @@
 import pygame
 import random
+import os
+import sys
 
 # 게임 화면 크기 설정
 WIDTH = 800
@@ -33,10 +35,7 @@ class Steak(pygame.sprite.Sprite):
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pygame.Surface((50, 50))
-        self.image.fill(WHITE)
-        self.rect = self.image.get_rect()
-    
+
     def update(self):
       # 키보드 입력 처리
       keys=pygame.key.get_pressed()
@@ -81,14 +80,14 @@ while running:
     current_time=pygame.time.get_ticks() 
     
      # 시작 시간 초기화 및 성공 카운트 리셋 
-     if start_time is None:  
+    if start_time is None:  
        start_time=current_time  
        success_count=0
     
-     elapsed_time=current_time-start_time  
+    elapsed_time=current_time-start_time  
     
      # 제한 시간 동안 실행 
-     if elapsed_time<=60000:  
+    if elapsed_time<=60000:  
       
        screen.fill(WHITE)  
       
@@ -104,32 +103,43 @@ while running:
            steak=Steak()    
            all_sprites.add(steak)   
         
-      
+           # 여기에 사운드 재생 코드를 추가하세요.
        
      
          # 타이머 출력 
-         font=pygame.font.Font(None ,36 )  
-         timer_text="Time: "+str(int((60000-elapsed_time)/1000))+"s"    
-         timer_surface=font.render(timer_text,True ,(0 ,0 ,0 ))     
-         screen.blit(timer_surface,(10 ,10 )) 
+    font=pygame.font.Font(None ,36 )  
+    timer_text="Time: "+str(int((60000-elapsed_time)/1000))+"s"    
+    timer_surface=font.render(timer_text,True ,(0 ,0 ,0 ))     
+    screen.blit(timer_surface,(10 ,10 )) 
     
          # 점수 출력 
-         score_text="Score: "+str(success_count)+"/10"   
-         score_surface=font.render(score_text,True ,(0 ,0 ,0 ))    
-         screen.blit(score_surface,(10 ,60 ))
+    score_text="Score: "+str(success_count)+"/10"   
+    score_surface=font.render(score_text,True ,(0 ,0 ,0 ))    
+    screen.blit(score_surface,(10 ,60 ))
         
+    
        
      
      
-     else:   # 제한 시간 종료 시 게임 종료 메시지 출력 후 종료 처리 
+else:   # 제한 시간 종료 시 게임 종료 메시지 출력 후 종료 처리 
         
-             font_end_game_title=pygame.font.Font(None ,72 )   
-             end_game_title="Game Over!"    
-             end_game_title_surface=font_end_game_title.render(end_game_title,True ,(255 ,0 ,0 ))     
-             screen.blit(end_game_title_surface,(WIDTH//2 -200 ,HEIGHT//2 -100 ))
+    font_end_game_title=pygame.font.Font(None ,72 )   
+    end_game_title="Game Over!"    
+    end_game_title_surface=font_end_game_title.render(end_game_title,True ,(255 ,
+                                            165 ,
+                                            40 ))     
+    screen.blit(end_game_title_surface,(WIDTH//2 -200 ,
+                                            HEIGHT//2 -100 ))
             
-             font_end_score_info=pygame.font.Font(None ,48 )     
-             end_score_info="Your Score: "+str(success_count)+"/10"   
-             end_score_info_surface=font_end_score_info.render(end_score_info,True ,(255 ,165 ,40 ))    
-             screen.blit(end_score_info_surface,(WIDTH//2 -150   ,
+    font_end_score_info=pygame.font.Font(None ,48 )     
+    end_score_info="Your Score: "+str(success_count)+"/10"   
+    end_score_info_surface=font_end_score_info.render(end_score_info,True ,(255 ,
+                                            165 ,
+                                            40 ))    
+    screen.blit(end_score_info_surface,(WIDTH//2 -150   ,
                                             HEIGHT//2 +20 ))
+
+    pygame.display.flip()
+
+# 게임 루프 종료 후 Pygame 종료
+pygame.quit()
