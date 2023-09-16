@@ -131,7 +131,8 @@ else:   # 제한 시간 종료 시 게임 종료 메시지 출력 후 종료 처
     screen.blit(end_game_title_surface,(WIDTH//2 -200 ,
                                             HEIGHT//2 -100 ))
             
-    font_end_score_info=pygame.font.Font(None ,48 )     
+    font_end_score_info=pygame.font.Font(None ,
+                                            48 )     
     end_score_info="Your Score: "+str(success_count)+"/10"   
     end_score_info_surface=font_end_score_info.render(end_score_info,True ,(255 ,
                                             165 ,

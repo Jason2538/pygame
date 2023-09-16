@@ -69,8 +69,7 @@ all_sprites.add(player) # 플레이어 객체를 그룹에 추가
 
 running=True 
 while running:
-    clock.tick(30) 
-    
+    clock.
     for event in pygame.event.get():
          if event.type == pygame.QUIT:
             running=False
@@ -81,7 +80,7 @@ while running:
     all_sprites.draw(screen)  
     
      # 충돌 감지 
-     collisions=pygame.sprite.spritecollide(player , all_sprites , False )   
+     collisions=pygame.sprite.spritecollide(play all_sprites , False )   
       
      for collision in collisions:   
          # 비와 충돌 시 게임 종료 처리
