@@ -24,16 +24,13 @@ pygame.display.set_caption("맛있는 60계 갈비")
 
 clock = pygame.time.Clock()
 
-# 스테이크 클래스 정의
 class Steak(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        #self.image = pygame.image.load(os.path.join(assets_path, "steak (1).jpg"))
-        #self.rect = self.image.get_rect()
-        #self.rect.centerx = random.randint(50, WIDTH - 10)
-        self.rect.centery = random.randint(80, HEIGHT - 10)
-        
-
+        self.image = pygame.image.load(os.path.join(assets_path, "steak (1).jpg"))
+        self.rect = self.image.get_rect()
+        self.rect.centerx = random.randint(100, WIDTH - 100)
+        self.rect.centery = random.randint(100, HEIGHT - 100)
 
     def update(self):
         pass
@@ -42,10 +39,10 @@ class Steak(pygame.sprite.Sprite):
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.sound = pygame.image.load(os.path.join(assets_path, "people.png"))
-        self.rect = self.sound.get_rect()
-        self.rect.centerx = random.randint(50, WIDTH - 10)
-        self.rect.centery = random.randint(80, HEIGHT - 10)
+        self.image = pygame.image.load(os.path.join(assets_path, "윤아로 남친.png"))
+        self.rect = self.image.get_rect()
+        self.rect.centerx = random.randint(300, WIDTH - 100)
+        self.rect.centery = random.randint(300, HEIGHT - 100)
         
 
     def update(self):
@@ -53,19 +50,19 @@ class Player(pygame.sprite.Sprite):
         keys=pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             if player.rect.x >0:
-                player.rect.x -=5
+                player.rect.x -=15
         
         if keys[pygame.K_RIGHT]:
             if player.rect.x < WIDTH-50:
-                player.rect.x +=5
+                player.rect.x +=15
         
         if keys[pygame.K_UP]:
             if player.rect.y >0:
-                player.rect.y -=5
+                player.rect.y -=15
         
         if keys[pygame.K_DOWN]:
             if player.rect.y < HEIGHT-50:
-                player.rect.y +=5
+                player.rect.y +=15
 
 # 스프라이트 그룹 생성
 all_sprites = pygame.sprite.Group()
@@ -84,7 +81,7 @@ success_count=0
 
 running=True 
 while running:
-    clock.tick(30) 
+    clock.tick(60) 
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -120,15 +117,16 @@ while running:
         
             # 여기에 사운드 재생 코드를 추가하세요.
        
+        time = (pygame.time.get_ticks()) // 1000
      
         # 타이머 출력 
-        font=pygame.font.Font(None ,36 )  
-        timer_text="Time: "+str(int((60000-elapsed_time)/1000))+"s"    
-        timer_surface=font.render(timer_text,True ,(0 ,0 ,0 ))     
-        screen.blit(timer_surface,(10 ,10 )) 
-        
+        font = pygame.font.Font(None, 36)  
+        timer_text = "Time: " + str(time) + "s"
+        timer_surface = font.render(timer_text, True, (0, 0, 0))     
+        screen.blit(timer_surface, (10 ,10))
+
         # 점수 출력 
-        score_text="Score: "+str(success_count)+"/10" 
+        score_text="Score: "+str(success_count)+"/100" 
         score_surface=font.render(score_text,True ,(0 ,0 ,0 ))    
         screen.blit(score_surface,(10 ,60 ))
      
@@ -143,7 +141,7 @@ while running:
                                                 HEIGHT//2 -100 ))
                 
         font_end_score_info=pygame.font.Font(None ,48 )     
-        end_score_info="Your Score: "+str(success_count)+"/10"   
+        end_score_info="Your Score: "+str(success_count)+"/1000"   
         end_score_info_surface=font_end_score_info.render(end_score_info,True ,(255 ,
                                                 165 ,
                                                 40 ))    
@@ -153,6 +151,7 @@ while running:
     pygame.display.flip()
 
 # 게임 루프 종료 후 Pygame 종료
-    if success_count >= 10:
-        print("승리")  
+    if success_count >= 100:
+        print("승리")
+        print("Time: " + str(time) + "s")  
         pygame.quit()
