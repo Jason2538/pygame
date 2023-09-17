@@ -26,7 +26,7 @@ clock = pygame.time.Clock()
 class Steak(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pygame.image.load(os.path.join(assets_path, "steak (1).jpg"))
+        self.image = pygame.image.load(os.path.join(assets_path, "steak4 (1).png"))
         self.rect = self.image.get_rect()
         self.rect.centerx = random.randint(100, WIDTH - 100)
         self.rect.centery = random.randint(100, HEIGHT - 100)
@@ -94,8 +94,6 @@ while running:
     
     elapsed_time=current_time-start_time  
     
-     # 제한 시간 동안 실행 
-    print(elapsed_time)
 
     if elapsed_time<=60000:
       
@@ -115,11 +113,13 @@ while running:
             all_sprites.add(steak)   
         
             # 여기에 사운드 재생 코드를 추가하세요.
-       
-     
+        
+            time = (pygame.time.get_ticks()) // 1000
+
+
         # 타이머 출력 
         font=pygame.font.Font(None ,36 )  
-        timer_text="Time: "+str(int((60000-elapsed_time)/1000))+"s"    
+        timer_text = "Time: " + str(time) + "s"  
         timer_surface=font.render(timer_text,True ,(0 ,0 ,0 ))     
         screen.blit(timer_surface,(10 ,10 )) 
         

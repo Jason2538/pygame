@@ -4,7 +4,7 @@ import os
 import sys
 
 # 게임 화면 크기 설정
-WIDTH = 1920
+WIDTH = 1200
 HEIGHT = 720
 
 # 색깔 정의 (RGB)
@@ -27,7 +27,7 @@ clock = pygame.time.Clock()
 class Steak(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pygame.image.load(os.path.join(assets_path, "steak (1).jpg"))
+        self.image = pygame.image.load(os.path.join(assets_path, "steak5.jpg"))
         self.rect = self.image.get_rect()
         self.rect.centerx = random.randint(100, WIDTH - 100)
         self.rect.centery = random.randint(100, HEIGHT - 100)
@@ -39,7 +39,7 @@ class Steak(pygame.sprite.Sprite):
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pygame.image.load(os.path.join(assets_path, "윤아로 남친.png"))
+        self.image = pygame.image.load(os.path.join(assets_path, "people.png"))
         self.rect = self.image.get_rect()
         self.rect.centerx = random.randint(300, WIDTH - 100)
         self.rect.centery = random.randint(300, HEIGHT - 100)
@@ -79,13 +79,12 @@ player_sprite.add(player) # 플레이어 객체를 그룹에 추가
 start_time= None 
 success_count=0 
 
+
 running=True 
 while running:
     clock.tick(60) 
     
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running=False
+
     
     current_time=pygame.time.get_ticks() 
     
@@ -96,10 +95,10 @@ while running:
     
     elapsed_time=current_time-start_time  
     
+    
 
 
     if elapsed_time<=60000:
-      
         screen.fill(WHITE)  
       
         all_sprites.update()
@@ -150,8 +149,17 @@ while running:
 
     pygame.display.flip()
 
+    if success_count >= 100:
+        print("승리")
+        print("Time: " + str(time) + "s") 
+
 # 게임 루프 종료 후 Pygame 종료
     if success_count >= 100:
         print("승리")
-        print("Time: " + str(time) + "s")  
-        pygame.quit()
+        print("Time: " + str(time) + "s") 
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running=False
+
+ 
+    pygame.quit()

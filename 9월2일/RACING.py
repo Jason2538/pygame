@@ -117,7 +117,7 @@ class Game():
     def __init__(self):
             m_i_p = resource_path('assets\menu_car.png')
             self.image_intro = pygame.image.load(m_i_p)
-            pygame.mixer.music.load(resource_path('assets\race.wav'))
+            pygame.mixer.music.load(resource_path('assets/race.wav'))
             font_path = pygame.font.SysFont("Malgun Gothic", 40)
             front_path = pygame.font.SysFont("Malgun Gothic",30)
 
@@ -125,7 +125,7 @@ class Game():
             self.lanes = []
             for i in range(lane_c):
                 lane = Lane()
-                lane.x = i * int(lane.space + lane.width)
+                lane.x = i * int(lane.space + lane.w)
                 self.lanes.append(lane)  # Moved inside the loop
 
             self.cars = []
