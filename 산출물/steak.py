@@ -27,7 +27,7 @@ clock = pygame.time.Clock()
 class Steak(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pygame.image.load(os.path.join(assets_path, "steak5.jpg"))
+        self.image = pygame.image.load(os.path.join(assets_path, "steak4 (1) (1).png"))
         self.rect = self.image.get_rect()
         self.rect.centerx = random.randint(100, WIDTH - 100)
         self.rect.centery = random.randint(100, HEIGHT - 100)
@@ -132,7 +132,7 @@ while running:
     else:   # 제한 시간 종료 시 게임 종료 메시지 출력 후 종료 처리 
             
         font_end_game_title=pygame.font.Font(None ,72 )   
-        end_game_title="Game Over!"    
+        end_game_title=" Over!"    
         end_game_title_surface=font_end_game_title.render(end_game_title,True ,(255 ,
                                                 165 ,
                                                 40 ))     
@@ -149,17 +149,15 @@ while running:
 
     pygame.display.flip()
 
-    if success_count >= 100:
-        print("승리")
-        print("Time: " + str(time) + "s") 
 
 # 게임 루프 종료 후 Pygame 종료
     if success_count >= 100:
         print("승리")
         print("Time: " + str(time) + "s") 
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running=False
 
  
-    pygame.quit()
+pygame.quit()
