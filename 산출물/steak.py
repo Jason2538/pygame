@@ -4,8 +4,8 @@ import os
 import sys
 
 # 게임 화면 크기 설정
-WIDTH = 1200
-HEIGHT = 720
+WIDTH = 800
+HEIGHT = 600
 
 # 색깔 정의 (RGB)
 WHITE = (255, 255, 255)
@@ -82,7 +82,11 @@ success_count=0
 
 running=True 
 while running:
-    clock.tick(60) 
+    clock.tick(120) 
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running=False
     
 
     
@@ -150,14 +154,8 @@ while running:
     pygame.display.flip()
 
 
-# 게임 루프 종료 후 Pygame 종료
-    if success_count >= 100:
-        print("승리")
-        print("Time: " + str(time) + "s") 
+if success_count >= 100:
+    print("승리")
+    print("Time: " + str(time) + "s") 
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running=False
-
- 
 pygame.quit()
