@@ -20,7 +20,7 @@ assets_path = os.path.join(current_path, "assets")
 # 게임 초기화
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("맛있는 60계 갈비")
+pygame.display.set_caption("steak game")
 
 clock = pygame.time.Clock()
 
@@ -133,15 +133,7 @@ while running:
         score_surface=font.render(score_text,True ,(0 ,0 ,0 ))    
         screen.blit(score_surface,(10 ,60 ))
      
-    else:   # 제한 시간 종료 시 게임 종료 메시지 출력 후 종료 처리 
-            
-        font_end_game_title=pygame.font.Font(None ,72 )   
-        end_game_title=" Over!"    
-        end_game_title_surface=font_end_game_title.render(end_game_title,True ,(255 ,
-                                                165 ,
-                                                40 ))     
-        screen.blit(end_game_title_surface,(WIDTH//2 -200 ,
-                                                HEIGHT//2 -100 ))
+    else:
                 
         font_end_score_info=pygame.font.Font(None ,48 )     
         end_score_info="Your Score: "+str(success_count)+"/1000"   
@@ -156,6 +148,8 @@ while running:
 
 if success_count >= 100:
     print("승리")
-    print("Time: " + str(time) + "s") 
+    print("Time: " + str(time) + "s")
+    pygame.QUIT()
+
 
 pygame.quit()
