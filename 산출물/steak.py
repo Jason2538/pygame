@@ -146,10 +146,8 @@ while running:
     pygame.display.flip()
 
 
-if success_count >= 100:
-    print("승리")
-    print("Time: " + str(time) + "s")
-    pygame.QUIT()
-
-
+if success_count>=100:
+	print("승리")
+	print("Time: "+str(time)+"s")
+	
 pygame.quit()
