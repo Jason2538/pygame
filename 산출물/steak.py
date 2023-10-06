@@ -75,15 +75,15 @@ for _ in range(steak_count):
 player = Player()  # 플레이어 객체 생성
 player_sprite.add(player)  # 플레이어 객체를 그룹에 추가
 
-start_time = None
+start_time = pygame.time.get_ticks()  # 게임 시작 시간
+end_time = None  # 게임 종료 시간 초기화
 success_count = 0
 
 running = True
-stopwatch = pygame.time.Clock()
-elapsed_time = 0
 
+# 게임 루프
 while running:
-    stopwatch.tick(60)
+    clock.tick(60)
     current_time = pygame.time.get_ticks()
 
     for event in pygame.event.get():
@@ -92,9 +92,9 @@ while running:
 
     # 게임 종료 조건: 스테이크 갯수가 100개에 도달하면 종료
     if success_count >= 100:
-        print("게임 종료")
-        print("Your Score: " + str(success_count) + "/100")
         running = False
+        end_time = pygame.time.get_ticks()  # 게임 종료 시간 기록
+        elapsed_time = (end_time - start_time) // 1000  # ms를 초로 변환
 
     screen.fill(WHITE)
 
@@ -111,14 +111,42 @@ while running:
         steak = Steak()
         all_sprites.add(steak)
 
-    elapsed_time = current_time - start_time
-
-    # 타이머 출력
+    # 현재 스코어 출력
     font = pygame.font.Font(None, 36)
-    timer_text = "Time: " + str(elapsed_time // 1000) + "s"
+    score_text = "Score: " + str(success_count) + "/100"
+    score_surface = font.render(score_text, True, (0, 0, 0))
+    screen.blit(score_surface, (10, 10))
+
+    # 스톱워치 출력
+    if end_time is None:
+        elapsed_time = (current_time - start_time) // 1000  # ms를 초로 변환
+    else:
+        elapsed_time = (end_time - start_time) // 1000  # 게임 종료 시간을 기준으로 계산
+
+    timer_text = "Elapsed Time: " + str(elapsed_time) + "s"
     timer_surface = font.render(timer_text, True, (0, 0, 0))
-    screen.blit(timer_surface, (10, 10))
+    screen.blit(timer_surface, (10, 50))
 
     pygame.display.flip()
+
+# 게임 종료 후 결과 화면
+screen.fill(WHITE)
+font = pygame.font.Font(None, 72)
+result_text = "Game Over"
+result_surface = font.render(result_text, True, (255, 0, 0))
+screen.blit(result_surface, ((WIDTH - result_surface.get_width()) // 2, (HEIGHT - result_surface.get_height()) // 2))
+
+score_text = "Your Score: " + str(success_count) + "/100"
+score_surface = font.render(score_text, True, (0, 0, 0))
+screen.blit(score_surface, ((WIDTH - score_surface.get_width()) // 2, ((HEIGHT - score_surface.get_height()) // 2) + 100))
+
+elapsed_time_text = "Elapsed Time: " + str(elapsed_time) + "s"
+elapsed_time_surface = font.render(elapsed_time_text, True, (0, 0, 0))
+screen.blit(elapsed_time_surface, ((WIDTH - elapsed_time_surface.get_width()) // 2, ((HEIGHT - elapsed_time_surface.get_height()) // 2) + 200))
+
+pygame.display.flip()
+
+# 게임 종료 대기
+pygame.time.wait(5000)  # 5초 동안 결과 화면을 보여줌
 
 pygame.quit()
