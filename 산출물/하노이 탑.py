@@ -148,17 +148,17 @@ def game(s1, s2, s3, m):
             s_c.reverse()
             if s3 == s_c:   
                 end = 1
-            pygame.font.init()
+            # pygame.font.init()
             font = pygame.font.Font(None, 36)  
             timer_text = "Time: " + str(time) + "s"
             timer_surface = font.render(timer_text, True, (0, 0, 0))
             screen.blit(timer_surface, (10 ,10))
-            pygame.quit()
+            # pygame.quit()
 
             count_text = "Count: " + str(count)    
             count_surface = font.render(count_text, True, (0, 0, 0))
             screen.blit(count_surface, (150, 10))
-            pygame.init()
+            # pygame.init()
             
     
             min_text = "Min: " + str(2 ** (m - 1) - 1)

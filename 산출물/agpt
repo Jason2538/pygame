@@ -149,18 +149,20 @@ def game(s1, s2, s3, m):
             if s3 == s_c:   
                 end = 1
             
-            pygame.init()
+            # pygame.font.init()
             font = pygame.font.Font(None, 36)  
             timer_text = "Time: " + str(time) + "s"
             timer_surface = font.render(timer_text, True, (0, 0, 0))
-            screen.blit[timer_surface, (10 ,10)]
+            screen.blit(timer_surface, (10 ,10))
+            
 
+            # pygame.display.init()
             count_text = "Count: " + str(count)    
             count_surface = font.render(count_text, True, (0, 0, 0))
             screen.blit(count_surface, (150, 10))
-
             
-    
+            
+            # pygame.init()
             min_text = "Min: " + str(2 ** (m - 1) - 1)
             min_surface = font.render(min_text, True, (0, 0, 0))
             screen.blit(min_surface, (300, 10))
@@ -169,7 +171,7 @@ def game(s1, s2, s3, m):
             change_surface = font.render(change_text, True, (0, 0, 0))
             screen.blit(change_surface, (420, 10))
 
-        else:
+    else:
             screen.fill(BACKGROUND)
             font = pygame.font.Font(None, 72)
             surface = font.render("GAME OVER!", True, (0, 0, 0))
@@ -187,8 +189,8 @@ def game(s1, s2, s3, m):
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_r:
                         main()
-        pygame.display.flip()
-        clock.tick(60)
+    pygame.display.flip()
+    clock.tick(60)
     pygame.quit()
 
 def main():
