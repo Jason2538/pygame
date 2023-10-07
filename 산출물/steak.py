@@ -8,6 +8,7 @@ HEIGHT = 600
 
 # 색상 정의 (RGB)
 WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 
@@ -20,6 +21,15 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Steak Game")
 
 clock = pygame.time.Clock()
+
+
+screen.fill(WHITE) 
+font = pygame.font.Font(None, 72)
+sposdpjfilwj_text = "Game starts in 5 seconds"
+score_surface = font.render(sposdpjfilwj_text, True, BLACK)
+screen.blit(score_surface, (WIDTH//2 - 300, HEIGHT//2 - 300))
+pygame.display.flip()
+pygame.time.wait(5000)
 
 class Steak(pygame.sprite.Sprite):
     def __init__(self):
@@ -77,9 +87,10 @@ player_sprite.add(player)  # 플레이어 객체를 그룹에 추가
 
 start_time = pygame.time.get_ticks()  # 게임 시작 시간
 end_time = None  # 게임 종료 시간 초기화
-success_count = 0
+success_count = -1
 
 running = True
+success_count = -1
 
 # 게임 루프
 while running:
@@ -108,6 +119,7 @@ while running:
     for collision in collisions:
         success_count += 1
 
+
         steak = Steak()
         all_sprites.add(steak)
 
@@ -135,7 +147,6 @@ font = pygame.font.Font(None, 72)
 result_text = "Game Over"
 result_surface = font.render(result_text, True, (255, 0, 0))
 screen.blit(result_surface, ((WIDTH - result_surface.get_width()) // 2, (HEIGHT - result_surface.get_height()) // 2))
-
 score_text = "Your Score: " + str(success_count) + "/100"
 score_surface = font.render(score_text, True, (0, 0, 0))
 screen.blit(score_surface, ((WIDTH - score_surface.get_width()) // 2, ((HEIGHT - score_surface.get_height()) // 2) + 100))
